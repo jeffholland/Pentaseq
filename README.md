@@ -3,7 +3,11 @@ Pentatonic melody writer/player. Final project for Dr. Schuyler Quackenbush's C 
 
 Comes with several pre-written melodies which of course can be deleted if desired.
 
-To run: ./build.sh, ./pentaseq.
+# To run:
+
+./build.sh, ./pentaseq.
+
+# To use:
 
 How to write a melody:
 - Name: Enter a name that will be valid as a filename (the program will automatically generate a .txt file with this name).

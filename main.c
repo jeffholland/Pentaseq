@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <portaudio.h>
-#include <sndfile.h>
+// #include <sndfile.h>
 #include <ncurses.h>  // User interface
 #include <stdlib.h>   // For atoi()
 #include <string.h>   // For memset()
@@ -37,7 +37,7 @@ typedef struct {
     Synth *ps;
     Melody *pm;
     int wav_out; // Sets to 1 if user chooses to record output
-    SNDFILE *sndfile;
+    // SNDFILE *sndfile;
 } Buf;
 
 /* PortAudio callback function protoype */
@@ -76,7 +76,7 @@ int main(void)
   WINDOW* read_melody_win;
 
   /* Instantiate SF_INFO struct for output file  */
-  SF_INFO sfinfo;
+  // SF_INFO sfinfo;
 
   /* Initialize synth params */
   ps->samp_rate = SAMP_RATE;
@@ -353,19 +353,19 @@ int main(void)
           break;
       }
 
-      if (buf.wav_out && only_once) { // Set up recording
-        const char* melody_wav_name = pm->filename;
-        /* Initialize sndfile output params */
-        memset(&sfinfo, 0, sizeof(sfinfo));
-        sfinfo.samplerate = SAMP_RATE;
-        sfinfo.channels = NUM_CHAN;
-        sfinfo.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
-        if ( (buf.sndfile = sf_open ("out.wav", SFM_WRITE, &sfinfo)) == NULL ) {
-            fprintf (stderr, "Error: could not open output wav file\n");
-            return -1;
-        }
-        only_once = 0;
-      }
+      // if (buf.wav_out && only_once) { // Set up recording
+      //   const char* melody_wav_name = pm->filename;
+      //   /* Initialize sndfile output params */
+      //   memset(&sfinfo, 0, sizeof(sfinfo));
+      //   sfinfo.samplerate = SAMP_RATE;
+      //   sfinfo.channels = NUM_CHAN;
+      //   sfinfo.format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
+      //   if ( (buf.sndfile = sf_open ("out.wav", SFM_WRITE, &sfinfo)) == NULL ) {
+      //       fprintf (stderr, "Error: could not open output wav file\n");
+      //       return -1;
+      //   }
+      //   only_once = 0;
+      // }
 
       display_read_melody(read_melody_win, highlight, counter);
       if (choice != 0) {
@@ -386,9 +386,9 @@ int main(void)
     refresh();
   }
 
-  if (buf.wav_out)
-      /* close debugging output wav file */
-      sf_close (buf.sndfile);
+  // if (buf.wav_out)
+  //     /* close debugging output wav file */
+  //     sf_close (buf.sndfile);
 
   /* Close PortAudio and Ncurses */
   shutdownPa(stream);
@@ -557,9 +557,9 @@ static int paCallback(
       }
     }
 
-  if (pb->wav_out)
+  // if (pb->wav_out)
     /* write to output file */
-    sf_writef_float (pb->sndfile, output, framesPerBuffer);
+    // sf_writef_float (pb->sndfile, output, framesPerBuffer);
 
     return 0;
 }
